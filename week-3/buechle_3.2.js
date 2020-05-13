@@ -74,6 +74,7 @@ var postgres = postgresFactory.createDatabase({
 console.log(postgres instanceof Postgres);
 console.log(postgres);
 
+//database factory objects
 var mySqlFactory = new DatabaseFactory();
 var mySql = mySqlFactory.createDatabase({
     databaseType: 'MySQL',
@@ -85,6 +86,7 @@ var mySql = mySqlFactory.createDatabase({
 console.log(mySql instanceof MySql);
 console.log(mySql);
 
+//database factory objects
 var oracleFactory = new DatabaseFactory();
 var oracle = oracleFactory.createDatabase({
     databaseType:"Oracle",
@@ -96,6 +98,7 @@ var oracle = oracleFactory.createDatabase({
 console.log(oracle instanceof Oracle);
 console.log(oracle);
 
+//database factory objects
 var informixFactory = new DatabaseFactory();
 var informix = informixFactory.createDatabase({
     databaseType: "Informix",
