@@ -45,6 +45,7 @@ function Informix (props) {
 
 function DatabaseFactory() {}
 
+//if statement that helps to create the database method
 DatabaseFactory.prototype.databaseClass = MySql;
 DatabaseFactory.prototype.createDatabase = function(props) {
     if (props.databaseType === "Postgres") {
@@ -69,6 +70,7 @@ var postgres = postgresFactory.createDatabase({
     password: "SuperSecret"
 });
 
+//prints the postgres object out
 console.log(postgres instanceof Postgres);
 console.log(postgres);
 
@@ -79,6 +81,7 @@ var mySql = mySqlFactory.createDatabase({
     password: "password"
 });
 
+//prints the mySql object  out
 console.log(mySql instanceof MySql);
 console.log(mySql);
 
@@ -89,6 +92,7 @@ var oracle = oracleFactory.createDatabase({
     password: "Secret"
 });
 
+//prints the oracle object out
 console.log(oracle instanceof Oracle);
 console.log(oracle);
 
@@ -99,6 +103,7 @@ var informix = informixFactory.createDatabase({
     password: "Jack87"
 });
 
+//prints the informix object out
 console.log(informix instanceof Informix);
 console.log(informix);
 
