@@ -63,6 +63,7 @@ DatabaseFactory.prototype.createDatabase = function(props) {
     return new this.databaseClass(props);
 };
 
+//database factory objects
 var postgresFactory = new DatabaseFactory();
 var postgres = postgresFactory.createDatabase({
     databaseType: "Postgres",
