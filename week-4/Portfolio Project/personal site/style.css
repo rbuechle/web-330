@@ -1,0 +1,129 @@
+html {
+  background-color: rgb(10, 25, 48);
+  font-family: 'Oswald', Verdana, Arial, sans-serif;
+}
+
+a {
+  color: rgb(214, 131, 141);
+  padding: 5px;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.table {
+  margin: auto;
+  text-align: left;
+}
+
+.button {
+  margin: auto;
+  margin-top: 50px;
+  display: block;
+  width: 100px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+a.button:hover {
+  background-color: rgb(214, 131, 141);
+  color: lightgray;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav {
+  text-align: right;
+}
+
+
+.container {
+  text-align: center;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 300px;
+  margin-bottom: 480px;
+  color: lightgray;
+}
+
+.name {
+  padding: 40px;
+}
+
+h1 {
+  color: rgb(214, 131, 141);
+  font-size: 40px;
+}
+
+h2 {
+  color: rgb(214, 131, 141);
+  font-size: 25px;
+}
+
+h3 {
+  color: rgb(129, 216, 208);
+}
+
+.hello {
+  color: rgb(129, 216, 208);
+  font-size: 20px;
+}
+
+.tint {
+  position: relative;
+  float: left;
+  cursor: pointer;
+}
+
+.me {
+  width: 300px;
+}
+
+.tint:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(214,131,141,0.5);
+  transition: background .3s linear;
+}
+
+.tint:hover:before {
+  background: none;
+}
+
+
+.jack {
+  width: 500px;
+}
+
+.barn {
+  width: 500px;
+}
+
+.bio {
+  width: 500px;
+}
+
+.wireframe {
+  width: 500px;
+}
+
+.project_83 {
+  width: 500px;
+}
+
+.pattProto {
+  width: 500px;
+}
+
+.portfolio {
+  width: 500px;
+}
