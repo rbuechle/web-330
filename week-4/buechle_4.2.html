@@ -1,0 +1,40 @@
+<!--
+  /*
+============================================
+; Title: Assignment HTTP GET and Post Operations
+; Author: Peter Itskovich
+; Date: 19 May 2020
+; Modified By: Becca Buechle 
+; Description: HTTP GET and Post Operations
+;===========================================
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Assignment name</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h4>Get Request</h4>
+
+    <button id="get1">Click Me!</button> 
+
+    <script>
+      $(function() {
+        
+        $("#get1").click(function(){
+          $.get("https://dog.ceo/api/breeds/image/random", function(data, status) {
+            console.log("Data: " + JSON.stringify(data) + '\nStatus: ' + status);
+          })
+        });
+      });
+    </script>
+  </body>
+</html>
+
+
