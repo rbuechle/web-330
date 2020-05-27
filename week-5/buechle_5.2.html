@@ -1,0 +1,62 @@
+<!--
+/*
+============================================
+; Title: Assignment 5.2 Proxy Pattern
+; Author: Professor Itskovich
+; Date: 25 May 2020
+; Modified By: Becca Buechle
+; Description: Practice Proxy Pattern
+;===========================================
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>5.2 Proxy Pattern</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"> Home </a>
+      </li>
+      <li class="nav-item">
+    </ul>
+  </nav>
+
+  <div role="main" class="container">
+    <!-- Example 1 -->
+    <br /><br />
+    <h2>5.2 Proxy Pattern</h2>
+    <hr>
+    <br /><br />
+    <button id="btnExample1">Run test</button>
+    <br /><span id="proxyExampleOne"></span>
+    <script>
+      $(function() {
+
+        var car = {
+          make: "Subaru",
+          model: "WRX",
+          display: function() {
+            $("#proxyExampleOne").html("");
+            //clears span tag
+            $("#proxyExampleOne").append("<br/> Make: " + this.make + "<br/>" + "Model: " + this.model);
+          }
+        };
+
+        $("#btnExample1").click($.proxy(car, "display"));
+      });
+    </script>
+  </div>
+</body>
