@@ -1,0 +1,181 @@
+<!--/*
+============================================
+; Title: Assignment 8.3
+; Author: Peter Itskovich
+; Date: 16 May 2020
+; Modified By: Becca Buechle
+; Description: CRUD Ops
+;===========================================
+*/-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Exercise 8.4 - Buechle</title>
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.1.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+    <li class="nav-item active">
+    <a class="nav-link" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">About</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Contact Us</a>
+    </li>
+    </ul>
+</nav>
+  <div role="main" class="container">
+    <br /><br />
+    <div class="row" data-bind="if: error">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" role="alert">
+          <strong>Warning!</strong> <span data-bind="text: error()"></span>
+        </div>
+      </div>
+    </div>
+    <br />
+    <h2>CRUD Operations</h2>
+    <br /><br />
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card card-inverse" style="background-color:rgb(129, 216, 208); border-color:rgb(10, 25, 48); color: rgb(10, 25, 48)">
+          <div class="card-block p-3">
+            <h3 class="card-title">Employee List</h3>
+            <div class="card-text">
+              <div class="form-group row">
+                <label for="txtEmp" class="col-2 col-form-label">Name </label>
+                <div class="col-6">
+                  <input type="text" data-bind="value: employeeToAdd, valueUpdate:'afterkeydown'" class="form-control" id="txtEmp" style="border-color:rgb(10, 25, 48)" />
+                </div>
+                <div class="col-4">
+                  <a href="#" data-bind="click: add" class="btn btnprimary" style="border-color:rgb(10, 25, 48)">Add New</a>
+                </div>
+              </div>
+
+              <div class="card-text">
+                <table class="table table-light table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID Number</th>
+                      <th>Name</th>
+                      <th>Edit/Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody data-bind="foreach: Employees">
+                    <tr>
+                      <td data-bind="text: Id"></td>
+                      <td data-bind="text: Name"></td>
+                      <td>
+                        <span>
+                          <a href="#" class="btn btn-success" data-bind="click:$root.edit">
+                            <i class="fa fa-pencil fa-lg"> </i> Edit User
+                          </a>
+                        </span> |
+                        <span>
+                          <a href="#" class="btn btn-danger" data-bind="click:$root.remove">
+                            <i class="fa fa-trash-o fa-lg"> </i> Remove User
+                          </a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4" data-bind="if: Employee">
+          <div class="card card-inverse" style="background-color: rgb(129, 216, 208); border-color:rgb(10, 25, 48); color: rgb(10, 25, 48);">
+            <div class="card-block p-3">
+              <h3 class="card-title">Update Info</h3>
+              <div class="card-text">
+                <div class="form-group">
+                  <label for="txtName">Name: </label>
+                  <input type="text" id="txtName" data-bind="value: Employee().Name" class="form-control" style="border-color:rgb(10, 25, 48)" />
+                </div>
+                <div class="form-group float-right">
+                    <button data-bind="click: $root.cancel" class="btn btn-group btndanger" style="border-color:rgb(10, 25, 48)">Cancel</button>
+                    <button data-bind="click: $root.update" class="btn btn-group btnsuccess" style="border-color:rgb(10, 25, 48)">Update</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  
+  <script>
+    function Employee(id, name) {
+        this.Id = id;
+        this.Name = name;
+        }
+
+        var employeeList = [
+        new Employee(4378, "Becca Buechle"),
+        new Employee(5238, "Justin Smith"),
+        new Employee(6778, "Jack Bradshaw"),
+        new Employee(8767, "Kristel Morris"),
+        new Employee(9023, "Rob Bradshaw")
+        ];
+
+    function AllEmpViewModel()
+    {
+
+      var temp = this;
+      temp.error = ko.observable("");
+      temp.Id = ko.observable("");
+      temp.Name = ko.observable("");
+      temp.employeeToAdd = ko.observable("");
+
+      var Employee = {
+        Id: temp.Id,
+        Name: temp.Name
+      };
+
+      temp.Employee = ko.observable();
+      temp.Employees = ko.observableArray(employeeList);
+
+      temp.add = function () {
+        if ((temp.employeeToAdd() !== "") && (temp.Employees.indexOf(temp.employeeToAdd()) < 0))
+        {
+          temp.error("");
+          temp.Employees.push({Id: temp.Employees().length, Name: temp.employeeToAdd()});
+        }
+        else
+        {
+          temp.error("Duplicate or Invalid Entry.");
+        }
+        temp.employeeToAdd("");
+
+      }
+
+      temp.edit = function (Employee) {
+        temp.Employee(Employee);
+      };
+      temp.remove = function (Employee) {
+        temp.Employees.remove(Employee);
+      };
+      temp.cancel = function () {
+        temp.Employee(null);
+      };
+      temp.update = function () {
+        var l_employee = temp.Employee();
+        temp.Employees.remove(temp.Employee());
+        temp.Employees.push(l_employee);
+      }
+    }
+    ko.applyBindings(new AllEmpViewModel());
+
+  </script>
+</body>
+</html
