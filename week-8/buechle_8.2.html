@@ -1,0 +1,97 @@
+<!--/*
+============================================
+; Title: Assignment 8.2
+; Author: Peter Itskovich
+; Date: 16 May 2020
+; Modified By: Becca Buechle
+; Description: CR Ops
+;===========================================
+*/-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Exercise 8.2 - Buechle </title>
+  <!-- KO Library -->
+  <script src="../knockout-3.5.1.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+    </ul>
+  </nav>
+  
+  <div role="main" class="container">
+    <br /><br />
+    <h2>CR Example</h2>
+    <br />
+    <div class="row" data-bind="if: error">
+      <div class="col-sm-12">
+        <div class="alert alert-danger" role="alert">
+          <strong>Warning!</strong> <span data-bind="text: error()"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card card-inverse" style="background-color:rgb(129, 216, 208); border-color:rgb(10, 25, 48); color: rgb(10, 25, 48)">
+          <div class="card-block p-3">
+            <h3 class="card-title">List of Employees</h3>
+            <div class="card-text">
+              <div class="form-group row">
+                <label for="txtEmp" class="col-2 col-form-label">Name </label>
+                <div class="col-6">
+                  <input type="text" data-bind="value: employeeToAdd, valueUpdate:'afterkeydown'" class="form-control" id="txtEmp" style="border-color:rgb(10, 25, 48)" />
+                </div>
+                <div class="col-4">
+                  <a href="#" data-bind="click: add" class="btn btnprimary" style="border-color:rgb(10, 25, 48)">Add New</a>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="txtEmpList">Current Employees: </label>
+                <select size="10" class="form-control" data-bind="options: employeesArray" id="txtEmpList" style="border-color:rgb(10, 25, 48)"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    
+    function EmployeeViewModel() {
+      this.employeeToAdd = ko.observable("");
+      this.employeesArray = ko.observableArray(["Becca Buechle", "Jack Smith"]);
+      this.error = ko.observable("");
+      this.add = function() {
+        if ((this.employeeToAdd() !== "") && (this.employeesArray.indexOf(this.employeeToAdd()) < 0)) {
+          this.error("");
+          this.employeesArray.push(this.employeeToAdd());
+        } else {
+          this.error("Duplicate or Invalid Entry.");
+        }
+        this.employeeToAdd("");
+      }
+    }
+  
+    ko.applyBindings(new EmployeeViewModel());
+  
+  </script>
+</body>
+
+</html>
